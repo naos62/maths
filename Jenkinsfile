@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('test') {
       steps {
-        sh '''make
-'''
+        sh 'go test'
       }
     }
   }
