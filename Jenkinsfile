@@ -1,7 +1,7 @@
-node {
-  def root = tool name: 'Go 1.8', type: 'go'
-  pipeline {
+pipeline {
     agent any
+    node {
+      def root = tool name: 'Go 1.8', type: 'go'
     stages {
       stage('test') {
         steps {
