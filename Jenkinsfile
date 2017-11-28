@@ -1,7 +1,4 @@
 pipeline {
-  
-    
-  }
   stages {
     stage('Test') {
       agent {
@@ -14,7 +11,11 @@ pipeline {
     }
   }
   stage('Build') {
+     agent {
+      dockerfile true 
+       }
     steps {
+      
       script {
         def customImage = docker.build("capensis/math:${env.BUILD_ID}")
         customImage.push()
