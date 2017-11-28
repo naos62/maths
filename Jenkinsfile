@@ -6,7 +6,7 @@ pipeline {
     
   }
   stages {
-    stage('') {
+    stage('Test') {
       steps {
         sh 'go test'
       }
