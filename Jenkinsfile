@@ -15,9 +15,18 @@ pipeline {
      agent none
     steps {
       script {
-        def customImage = docker.build("bdubois/math:${env.BUILD_ID}")
-        customImage.push()
-        customImage.push("latest")
+        def customImage = docker.build("bdubois/math:${env.BUILD_NUMBER}")
+      }
+    }
+  }
+  stage('push') {
+    agent none
+    steps {
+      script {
+        docker.withRegistry('https://registry.hub.docker.com', 'Docker') {
+            customImage.push("${env.BUILD_NUMBER}")
+            customImage.push("latest")
+        }
       }
     }
   }
