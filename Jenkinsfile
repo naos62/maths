@@ -12,9 +12,8 @@ pipeline {
       }
     }
   stage('Build') {
-     agent {
-      dockerfile true 
-       }
+     agent none
+       
     steps {
       
       script {
