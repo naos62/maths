@@ -1,16 +1,13 @@
 pipeline {
     agent any
-    
+    def root = tool name: 'Go 1.8', type: 'go'
     stages {
-      stage('test') {
-        node {
-          def root = tool name: 'Go 1.8', type: 'go'
-          steps {
-            withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-            sh 'go version'
-          }
-          
+      stage('test') {    
+        steps {
+          withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+          sh 'go version'
         }
+          
       }
     }
   }
