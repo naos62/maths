@@ -16,7 +16,9 @@ pipeline {
         steps {
             script {
                 def customimage = docker.build("naos62/maths:${env.BUILD_NUMBER}")
-              
+                docker.withRegistry('https://registry.hub.docker.com', 'Docker') {
+                    customImage.push("${env.BUILD_NUMBER}")
+                    customImage.push("latest") 
          }
         }
    }
