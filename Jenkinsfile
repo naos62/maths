@@ -1,11 +1,12 @@
 pipeline {
   agent none
   stages {
-    stage('') {
+    stage('Testing') {
      agent {
       docker {
           image 'golang'
-      } 
+      }
+     } 
      steps {
         sh 'go test'
       }
