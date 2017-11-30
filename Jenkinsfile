@@ -1,26 +1,27 @@
 pipeline {
   agent none
   stages {
-    stage('Testing') {
-     agent {
-      docker {
-          image 'golang'
+    stage('Test') {
+      agent {
+        docker {
+        image 'golang'
+        }
       }
-     } 
-     steps {
+      steps {
         sh 'go test'
       }
     }
-   stage('Deploy') {
-        agent none
-        steps {
-            script {
-                def customimage = docker.build("naos62/maths:${env.BUILD_NUMBER}")
-                docker.withRegistry('https://registry.hub.docker.com', 'Docker') {
-                    customImage.push("${env.BUILD_NUMBER}")
-                    customImage.push("latest") 
-         }
+  stage('Deploy') {
+    agent none
+    steps {
+      script {
+        def customImage = docker.build("naos62/maths:${env.BUILD_NUMBER}")
+        docker.withRegistry('https://registry.hub.docker.com', 'Docker') {
+            customImage.push("${env.BUILD_NUMBER}")
+            customImage.push("latest")
         }
-   }
+      }
+    }
   }
+}
 }
