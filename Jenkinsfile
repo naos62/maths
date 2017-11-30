@@ -16,7 +16,7 @@ pipeline {
         steps {
             script {
                 def customimage = docker.build("naos62/maths:${env.BUILD_NUMBER}")
-            }
+              
          }
         }
    }
